@@ -12,11 +12,13 @@ public class Exercise2 : MonoBehaviour
     void Start()
     {
         bar = GetComponent<Image>();
+        //We set the start time at the max time
         time = maxTime;
     }
 
     void Update()
     {
+        //Until the time gets to 0, it will decrease
         if(time > 0)
         {
             time -= Time.deltaTime;

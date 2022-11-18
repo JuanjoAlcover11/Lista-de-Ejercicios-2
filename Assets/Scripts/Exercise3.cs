@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Exercise3 : MonoBehaviour
 {
+    //Position of the circle
     private Vector3 position;
+    //Screen limits
     private float xLim = 3f;
     private float yLim = 3f;
+    //Distance the circle moves
     private float distance = 1.5f;
 
     void Update()
     {
+        //Depending on the key pressed, the circle will move on a different direction
+        //It depends of the position (x,y,z) and if its positive or negative. Then we make it go straight with the rotation
         if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y != yLim)
         {
             position = new Vector3(transform.position.x, transform.position.y + distance, transform.position.z);

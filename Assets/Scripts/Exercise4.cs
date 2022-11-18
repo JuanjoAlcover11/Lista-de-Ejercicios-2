@@ -6,48 +6,51 @@ using TMPro;
 
 public class Exercise4 : MonoBehaviour
 {
-    private int correctNum;
-    private int incorrectNum;
+    //Two options: 0 or 1
+    public int options;
+    //The correct one
+    private int guess;
 
-    public TextMeshProUGUI correctText;
-    public TextMeshProUGUI incorrectText;
+    public TextMeshProUGUI correct;
+    public TextMeshProUGUI incorrect;
+    public GameObject result;
+    //We count the results and the turns
+    private int turn;
+    private int counter;
 
-    private int turnCounter = 10;
-    private int xNum;
-    private int randomNum;
-    public GameObject[] randomGuess;
 
-
-    public void Turns()
+    void Start()
     {
-        if(turnCounter > 0)
+        //We hide the results chart
+        result.SetActive(false);
+    }
+
+    public void Answer()
+    { 
+        options = Random.Range(0, 2);
+    }
+
+    public void AnswerCount()
+    {
+        //If our answer and the correct answer are the same, we add 1 to the counter
+        if (guess == options)
         {
-            randomGuess[randomNum].SetActive(false);
-            turnCounter--;
-            //StartCoroutine(Options());
+            counter++;
+        }
+        //We repeat this until turn 10
+        if (turn < 10)
+        {
+            turn++;
+            Answer();
+        }
+        //On turn 10...
+        if (turn == 10)
+        {
+            //...we show the results chart
+            result.SetActive(true);
+            correct.text = counter.ToString();
+            incorrect.text = (10 - counter).ToString();
+            Time.timeScale = 0;
         }
     }
-    
-   /* private IEnumerator Options()
-    {
-        randomNum = Random.Range(0, 2);
-        randomGuess[randomNum].SetActive(true);
-
-        if (randomNum == xNum)
-        {
-            correctNum++;
-        }
-        else
-        {
-            incorrectNum--;
-        }
-        if (turnCounter == 0)
-        {
-            randomGuess[randomNum].SetActive(false);
-            correctText.gameObject.SetActive(true);
-            correctText.gameObject.SetActive(false);
-            correctText.text = "Correct answers:" + correctNum;
-            incorrectText.text = "Incorrect answers:" + incorrectNum;
-        }
-    } */
 }
